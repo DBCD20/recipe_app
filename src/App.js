@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import RecipeWrapper from './RecipeWrapper';
+import Header from './Header';
+import Navbar from './Navbar';
+import RecipeForm from './addRecipeForm';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      formToggle: 'flex'
+    }
+    this.hideForm = this.hideForm.bind(this)
+
+  }
+  hideForm(e){
+    e.preventDefault();
+    this.setState({
+      formToggle: (this.state.formToggle === 'flex' ? 'none' : 'flex')
+    })
+  }
+  render(){
+    return (
+      <div style={{
+        position: 'relative',
+        zIndex: '1'
+      }}>
+        <Navbar toggle={ this.hideForm }/>
+        <Header />
+        <RecipeWrapper />
+        <RecipeForm display={ this.state.formToggle } toggle={ this.hideForm }  />
+      </div>
+     );
+  }
 }
 
 export default App;
