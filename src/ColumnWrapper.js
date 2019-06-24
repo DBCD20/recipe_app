@@ -3,7 +3,7 @@ import RecipeCard from './RecipeCard';
 
 const ColumnWrapper = props => {
     const recipe = props.recipe.map(food => (
-        <RecipeCard imgUrl = { food.imgUrl } title ={ food.title } />
+        <RecipeCard imgUrl = { food.imgUrl } title = { food.title } getRecipe = { props.getRecipe } />
 )); 
    return (
     <div style={{

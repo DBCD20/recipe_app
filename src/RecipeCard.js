@@ -9,7 +9,7 @@ import React from 'react';
                 margin: '10px',
                 boxShadow: '0 0 15px lightgrey',
                 cursor: 'pointer'
-                }}>
+                }} onClick={ (e) => props.getRecipe(e.currentTarget.querySelector('img').alt) }>
                 <img 
                     style={{
                         width:'400px',
@@ -25,7 +25,8 @@ import React from 'react';
                 }}>
                     { title }
                 </h2>
-            </div>  
+            </div>
+
         )
 }
 
