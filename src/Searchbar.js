@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const Searchbar = props => (
     <div style={{background: 'white', boxShadow: '0 0 30px lightgrey'}}>
@@ -9,16 +9,22 @@ const Searchbar = props => (
                 display: 'inline-block',
                 border: 'none',
 
-        }} />
-            <button style={{
+            }} 
+            onChange={props.search}
+            value={props.searchItem}
+            />
+            <span style={{
                     padding: '0.3em',
+                    textAlign: 'center',
+                    color: 'grey',
+                    fontFamily: 'sans-serif',
                     width: '20%',
                     display: 'inline-block',
                     border: 'none',
                     background: 'none',
                     cursor: 'pointer'
             }}
-            >| Search</button>
+            >| Search</span>
         </div>
 );
 

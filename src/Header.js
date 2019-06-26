@@ -26,7 +26,7 @@ const Header = props => (
         }}>
             Recipe
         </h1>
-        <Searchbar />
+        <Searchbar search={ props.search } searchItem={ props.searchItem } />
         </div>
         
     </header>

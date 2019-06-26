@@ -10,10 +10,11 @@ class App extends Component{
   constructor(props){
     super(props)
     this.state = {
-      formToggle: 'flex',
+      formToggle: false,
       appPosition: 'relative',
       viewRecipe: {},
       showRecipe: false,
+      searchItem: '',
 
       recipeList: [
         {
@@ -59,10 +60,11 @@ class App extends Component{
     this.disableScroll = this.disableScroll.bind(this);
     this.getRecipe     = this.getRecipe.bind(this);
     this.closeRecipe   = this.closeRecipe.bind(this);
+    this.searchRecipe  = this.searchRecipe.bind(this);
   }
   hideForm(){
     this.setState({
-      formToggle: (this.state.formToggle === 'flex' ? 'none' : 'flex')
+      formToggle: (this.state.formToggle ? false : true)
     })};
 
   disableScroll(){
@@ -75,20 +77,32 @@ class App extends Component{
     this.setState({
       recipeList: [...this.state.recipeList, recipe]
     })};
+
   getRecipe(title){
     this.setState({
       viewRecipe: this.state.recipeList.find(d => d.title === title),
       showRecipe: true,
       appPosition: 'fixed'
     })};
+
   closeRecipe(){
     this.setState({
       viewRecipe: '',
       showRecipe: false,
       appPosition: 'relative'
-    })
+    })};
+searchRecipe(e){
+  this.setState({
+    searchItem: e.target.value
+  })
+}
+  getListOfRecipe(){
+    let { searchItem, recipeList } = this.state;
+    if(searchItem !== ''){
+      return recipeList.filter(e => e.title.indexOf(searchItem) !== -1)
+    }
+    return recipeList;
   }
-
 
   render(){
     return (
@@ -97,9 +111,12 @@ class App extends Component{
         zIndex: '1'
       }}>
         <Navbar toggle={ this.hideForm }/>
-        <Header />
-        <RecipeWrapper recipeList={ this.state.recipeList } getRecipe= { this.getRecipe }/>
-        <RecipeForm display={ this.state.formToggle } toggle={ this.hideForm } addRecipe={ this.addRecipe } />
+        <Header search={ this.searchRecipe } searchItem={this.state.searchItem} />
+        <RecipeWrapper recipeList={ this.getListOfRecipe() } getRecipe={ this.getRecipe }/>
+        { 
+          this.state.formToggle &&
+          <RecipeForm toggle={ this.hideForm } addRecipe={ this.addRecipe } />
+        }
         {
           this.state.showRecipe &&
           <Recipe closeRecipe={ this.closeRecipe } viewRecipe = { this.state.viewRecipe }/> 
