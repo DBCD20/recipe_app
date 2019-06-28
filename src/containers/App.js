@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
-import RecipeWrapper from './RecipeWrapper';
-import Header from './Header';
-import Navbar from './Navbar';
+import '../App.css';
+import RecipeWrapper from '../components/RecipeWrapper';
+import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 import RecipeForm from './addRecipeForm';
-import Recipe from './Recipe';
+import Recipe from '../components/Recipe';
 
 class App extends Component{
   constructor(props){
